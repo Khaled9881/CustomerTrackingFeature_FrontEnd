@@ -1,11 +1,34 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark px-3">
-  <a class="navbar-brand" href="#">Customer Tracking</a>
-  <div class="navbar-nav">
-    <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-    <a class="nav-link" routerLink="/customers" routerLinkActive="active">Customers</a>
-  </div>
-</nav>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand-lockup" routerLink="/home" aria-label="Customer Tracking home">
+        <span class="brand-mark" aria-hidden="true">CT</span>
+        <span class="brand-copy">
+          <strong>Customer Tracking</strong>
+          <small>FIELD OPERATIONS</small>
+        </span>
+      </a>
 
-<div class="container mt-4">
-  <router-outlet></router-outlet>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <span>01</span>Overview
+        </a>
+        <a routerLink="/customers" routerLinkActive="active"> <span>02</span>Customers </a>
+      </nav>
+
+      <div class="workspace-state">
+        <span class="state-indicator" aria-hidden="true"></span>
+        <span>Workspace ready</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <span>Customer Tracking</span>
+    <span>FIELD OPERATIONS / 01</span>
+  </footer>
 </div>

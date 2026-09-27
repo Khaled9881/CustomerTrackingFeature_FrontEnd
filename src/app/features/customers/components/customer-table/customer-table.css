@@ -1,0 +1,72 @@
+.customer-table-scroll {
+  overflow-x: auto;
+}
+
+.customer-table {
+  min-width: 760px;
+}
+
+.customer-photo-column {
+  width: 72px;
+}
+
+.customer-actions-column {
+  width: 245px;
+}
+
+.customer-thumbnail,
+.customer-thumbnail-placeholder {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.customer-thumbnail-placeholder {
+  color: var(--pine);
+  background: var(--soft-green);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.customer-name {
+  color: var(--ink) !important;
+  font-weight: 700;
+}
+
+.customer-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.customer-row-actions .btn {
+  min-height: 32px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.72rem;
+}
+
+.customer-empty-state {
+  height: 180px;
+  text-align: center;
+}
+
+.customer-empty-state strong,
+.customer-empty-state span {
+  display: block;
+}
+
+.customer-empty-state strong {
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.customer-empty-state span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}

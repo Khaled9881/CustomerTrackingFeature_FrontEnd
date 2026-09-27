@@ -1,67 +1,74 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Customers</h2>
-  <div class="d-flex gap-2">
-    <button class="btn btn-outline-primary" (click)="openNearestModal()">
-      Find Nearby Customers
-    </button>
-    <button class="btn btn-outline-primary" (click)="openViewAllModal()">View All on Map</button>
-  </div>
-</div>
+<section class="customers-page" aria-labelledby="customers-title">
+  <header class="customers-heading">
+    <div class="heading-copy">
+      <p class="eyebrow">CUSTOMER OPERATIONS / DIRECTORY</p>
+      <h1 id="customers-title">Customers</h1>
+      <p class="page-intro">Customer records, locations, and contact coverage.</p>
+    </div>
+    <div class="customer-actions">
+      <button class="btn btn-outline-primary" (click)="openNearestModal()">
+        Find Nearby Customers
+      </button>
+      <button class="btn btn-outline-primary" (click)="openViewAllModal()">View All on Map</button>
+      <button class="btn btn-primary" (click)="openAddModal()">+ Add Customer</button>
+    </div>
+  </header>
 
-<div class="btn-group mb-3" role="group">
-  <button
-    class="btn"
-    [class.btn-primary]="viewMode() === 'table'"
-    [class.btn-outline-primary]="viewMode() !== 'table'"
-    (click)="setViewMode('table')"
-  >
-    Table View
-  </button>
-  <button
-    class="btn"
-    [class.btn-primary]="viewMode() === 'card'"
-    [class.btn-outline-primary]="viewMode() !== 'card'"
-    (click)="setViewMode('card')"
-  >
-    Card View
-  </button>
-</div>
+  <section class="directory-toolbar" aria-label="Customer list controls">
+    <div class="view-switch" role="group" aria-label="Customer view">
+      <button
+        type="button"
+        [class.active]="viewMode() === 'table'"
+        [attr.aria-pressed]="viewMode() === 'table'"
+        (click)="setViewMode('table')"
+      >
+        Table
+      </button>
+      <button
+        type="button"
+        [class.active]="viewMode() === 'card'"
+        [attr.aria-pressed]="viewMode() === 'card'"
+        (click)="setViewMode('card')"
+      >
+        Cards
+      </button>
+    </div>
+    <p class="record-count">
+      <strong>{{ totalCount() }}</strong> customer records
+    </p>
+  </section>
 
-@if (viewMode() === 'table') {
-  <app-customer-table
-    [customers]="customers()"
-    (viewDetails)="onViewDetails($event)"
-    (viewLocation)="onViewLocation($event)"
-    (getDirections)="onGetDirections($event)"
-  ></app-customer-table>
-} @else {
-  <app-customer-card-list
-    [customers]="customers()"
-    (viewDetails)="onViewDetails($event)"
-    (viewLocation)="onViewLocation($event)"
-    (getDirections)="onGetDirections($event)"
-  ></app-customer-card-list>
-}
+  <section class="customer-results" aria-label="Customer records">
+    @if (viewMode() === 'table') {
+      <app-customer-table
+        [customers]="customers()"
+        (viewDetails)="onViewDetails($event)"
+        (viewLocation)="onViewLocation($event)"
+        (getDirections)="onGetDirections($event)"
+      ></app-customer-table>
+    } @else {
+      <app-customer-card-list
+        [customers]="customers()"
+        (viewDetails)="onViewDetails($event)"
+        (viewLocation)="onViewLocation($event)"
+        (getDirections)="onGetDirections($event)"
+      ></app-customer-card-list>
+    }
+  </section>
+
+  <app-pagination
+    [currentPage]="currentPage()"
+    [totalCount]="totalCount()"
+    [pageSize]="pageSize"
+    (pageChange)="goToPage($event)"
+  ></app-pagination>
+</section>
 
 <app-view-location-modal
   [isOpen]="isLocationModalOpen()"
   [customer]="selectedLocationCustomer()"
   (closed)="onLocationModalClosed()"
 ></app-view-location-modal>
-
-<app-pagination
-  [currentPage]="currentPage()"
-  [totalCount]="totalCount()"
-  [pageSize]="pageSize"
-  (pageChange)="goToPage($event)"
-></app-pagination>
-
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Customers</h2>
-  <button class="btn btn-primary" (click)="openAddModal()">+ Add Customer</button>
-</div>
-
-<!-- ...table/card/pagination... -->
 
 <app-nearest-customers-modal
   [isOpen]="isNearestModalOpen()"

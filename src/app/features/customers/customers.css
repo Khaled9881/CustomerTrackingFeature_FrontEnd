@@ -1,0 +1,149 @@
+.customers-page {
+  animation: page-enter 380ms ease-out both;
+}
+
+.customers-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 30px;
+}
+
+.heading-copy .eyebrow {
+  margin: 0 0 9px;
+  color: #718078;
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.heading-copy h1 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 2.55rem;
+  font-weight: 700;
+}
+
+.heading-copy .page-intro {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.customer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.directory-toolbar {
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+
+.view-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #d6e0d7;
+  border-radius: 7px;
+  background: #e9eee8;
+}
+
+.view-switch button {
+  min-width: 84px;
+  min-height: 34px;
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 5px;
+  color: #66746b;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.view-switch button.active {
+  color: var(--pine);
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(24, 47, 36, 0.12);
+}
+
+.record-count {
+  margin: 0;
+  color: #75827a;
+  font-size: 0.82rem;
+}
+
+.record-count strong {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.customer-results {
+  overflow: hidden;
+  min-height: 180px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 8px 28px rgba(24, 47, 36, 0.04);
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  .customers-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .customer-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .heading-copy h1 {
+    font-size: 2rem;
+  }
+
+  .customer-actions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .customer-actions .btn:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .directory-toolbar {
+    min-height: 52px;
+  }
+
+  .record-count {
+    text-align: right;
+  }
+}

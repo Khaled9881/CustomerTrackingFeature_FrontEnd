@@ -1,52 +1,53 @@
-<table class="table table-hover align-middle">
-  <thead class="table-light">
-    <tr>
-      <th style="width: 80px">Image</th>
-      <th>Name</th>
-      <th>Governorate</th>
-      <th>City</th>
-      <th style="width: 220px">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (customer of customers; track customer.id) {
+<div class="customer-table-scroll">
+  <table class="table table-hover align-middle customer-table">
+    <thead>
       <tr>
-        <td>
-          @if (customer.mainImagePath) {
-            <img
-              [src]="customer.mainImagePath"
-              [alt]="customer.name"
-              class="rounded"
-              style="width: 50px; height: 50px; object-fit: cover"
-            />
-          } @else {
-            <div
-              class="bg-secondary rounded d-flex align-items-center justify-content-center text-white"
-              style="width: 50px; height: 50px; font-size: 0.7rem"
-            >
-              No Img
-            </div>
-          }
-        </td>
-        <td>{{ customer.name }}</td>
-        <td>{{ customer.governorateName }}</td>
-        <td>{{ customer.cityName }}</td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1" (click)="onViewDetails(customer.id)">
-            Details
-          </button>
-          <button class="btn btn-sm btn-outline-secondary me-1" (click)="onViewLocation(customer)">
-            📍 Location
-          </button>
-          <button class="btn btn-sm btn-outline-success" (click)="onGetDirections(customer)">
-            🧭 Directions
-          </button>
-        </td>
+        <th scope="col" class="customer-photo-column">Photo</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Governorate</th>
+        <th scope="col">City / Area</th>
+        <th scope="col" class="customer-actions-column">Actions</th>
       </tr>
-    } @empty {
-      <tr>
-        <td colspan="5" class="text-center text-muted py-4">No customers found.</td>
-      </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @for (customer of customers; track customer.id) {
+        <tr>
+          <td>
+            @if (customer.mainImagePath) {
+              <img
+                [src]="customer.mainImagePath"
+                [alt]="customer.name"
+                class="customer-thumbnail"
+              />
+            } @else {
+              <span class="customer-thumbnail-placeholder" aria-label="No customer photo">
+                {{ customer.name.charAt(0) }}
+              </span>
+            }
+          </td>
+          <td class="customer-name">{{ customer.name }}</td>
+          <td>{{ customer.governorateName }}</td>
+          <td>{{ customer.cityName }}</td>
+          <td class="customer-row-actions">
+            <button class="btn btn-sm btn-outline-primary" (click)="onViewDetails(customer.id)">
+              Details
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="onViewLocation(customer)">
+              Location
+            </button>
+            <button class="btn btn-sm btn-outline-success" (click)="onGetDirections(customer)">
+              Directions
+            </button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="customer-empty-state">
+            <strong>No customer records yet</strong>
+            <span>New records will appear here.</span>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

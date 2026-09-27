@@ -1,16 +1,48 @@
-<div class="d-flex flex-column align-items-center justify-content-center mt-5">
-  <h2 class="mb-4">Progress Indicator</h2>
+<section class="home-page" aria-labelledby="home-title">
+  <header class="page-heading home-heading">
+    <p class="eyebrow">HOME / OVERVIEW</p>
+    <h1 id="home-title">Workspace overview</h1>
+    <p class="page-intro">A clear view of your customer operations.</p>
+  </header>
 
-  <div class="progress w-75" style="height: 30px;">
+  <section class="progress-panel" aria-labelledby="progress-title">
+    <div class="progress-heading">
+      <div>
+        <p class="eyebrow">LIVE INDICATOR</p>
+        <h2 id="progress-title">Progress preview</h2>
+      </div>
+      <div class="progress-number" aria-label="Progress value">
+        <span>{{ progressValue() }}</span
+        ><small>%</small>
+      </div>
+    </div>
+
     <div
-      class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+      class="progress-track"
       role="progressbar"
-      [style.width.%]="progressValue()"
       [attr.aria-valuenow]="progressValue()"
       aria-valuemin="0"
       aria-valuemax="100"
+      aria-label="Progress preview"
     >
-      {{ progressValue() }}%
+      <div class="progress-fill" [style.width.%]="progressValue()"></div>
     </div>
-  </div>
-</div>
+
+    <div class="progress-caption">
+      <span>SEQUENCE STATUS</span>
+      <span>ACTIVE CYCLE</span>
+    </div>
+  </section>
+
+  <section class="home-directory" aria-label="Customer directory">
+    <div class="directory-index" aria-hidden="true">01</div>
+    <div class="directory-copy">
+      <p class="eyebrow">DIRECTORY</p>
+      <h2>Customer records</h2>
+      <p>Keep customer details and locations in one working view.</p>
+    </div>
+    <a class="directory-link" routerLink="/customers">
+      Open customer directory <span aria-hidden="true">&rarr;</span>
+    </a>
+  </section>
+</section>

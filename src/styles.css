@@ -1,1 +1,235 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light;
+  --paper: #f2f5f0;
+  --surface: #ffffff;
+  --ink: #172820;
+  --muted: #68766e;
+  --line: #dce5dd;
+  --pine: #174635;
+  --pine-deep: #103629;
+  --lime: #d8ef75;
+  --blue: #315db4;
+  --coral: #d86f55;
+  --soft-green: #edf4ee;
+  --font-ui: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --shadow-soft: 0 18px 48px rgba(24, 47, 36, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--paper);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(23, 72, 53, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 72, 53, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: var(--pine);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(49, 93, 180, 0.45);
+  outline-offset: 2px;
+}
+
+.btn {
+  min-height: 40px;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  font-weight: 700;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn-primary,
+.btn-success {
+  border-color: var(--pine);
+  color: #fff;
+  background: var(--pine);
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  border-color: var(--pine-deep);
+  color: #fff;
+  background: var(--pine-deep);
+}
+
+.btn-outline-primary {
+  border-color: #9bb3a3;
+  color: var(--pine);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.btn-outline-primary:hover {
+  border-color: var(--pine);
+  color: #fff;
+  background: var(--pine);
+}
+
+.btn-outline-secondary {
+  border-color: #bdc9c0;
+  color: #42534a;
+}
+
+.btn-outline-success {
+  border-color: #95bba4;
+  color: var(--pine);
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+  border-color: #cad6cd;
+  border-radius: 6px;
+  color: var(--ink);
+  background-color: #fff;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #5c8a70;
+  box-shadow: 0 0 0 3px rgba(42, 104, 73, 0.13);
+}
+
+.form-label {
+  margin-bottom: 0.45rem;
+  color: #35483d;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.table {
+  --bs-table-color: var(--ink);
+  --bs-table-bg: transparent;
+  --bs-table-hover-bg: #f3f7f1;
+  margin-bottom: 0;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.9rem 1rem;
+  border-bottom-color: var(--line);
+}
+
+.table thead th {
+  color: #718078;
+  background: #f6f8f5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.modal.d-block {
+  position: fixed;
+  z-index: 1055;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: rgba(12, 31, 23, 0.56) !important;
+  backdrop-filter: blur(3px);
+}
+
+.modal-dialog {
+  margin: 5vh auto;
+}
+
+.modal-content {
+  overflow: hidden;
+  border: 1px solid rgba(220, 229, 221, 0.9);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.modal-header,
+.modal-footer {
+  padding: 1.1rem 1.35rem;
+  border-color: var(--line);
+}
+
+.modal-header {
+  background: #f7f9f6;
+}
+
+.modal-title {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.modal-body {
+  padding: 1.35rem;
+}
+
+.modal .card {
+  overflow: hidden;
+  border-color: var(--line);
+  border-radius: 7px;
+  box-shadow: none;
+}
+
+.alert {
+  border-radius: 6px;
+}
+
+@media (max-width: 575.98px) {
+  .modal.d-block {
+    padding: 0.5rem;
+  }
+
+  .modal-dialog {
+    margin: 0.5rem auto;
+  }
+
+  .modal-header,
+  .modal-footer,
+  .modal-body {
+    padding: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
