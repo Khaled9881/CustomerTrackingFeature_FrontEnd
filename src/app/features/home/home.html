@@ -1,0 +1,16 @@
+<div class="d-flex flex-column align-items-center justify-content-center mt-5">
+  <h2 class="mb-4">Progress Indicator</h2>
+
+  <div class="progress w-75" style="height: 30px;">
+    <div
+      class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+      role="progressbar"
+      [style.width.%]="progressValue()"
+      [attr.aria-valuenow]="progressValue()"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      {{ progressValue() }}%
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+@if (isOpen) {
+  <div class="modal d-block" tabindex="-1" style="background: rgba(0, 0, 0, 0.5)">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Customer</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            @if (errorMessage) {
+              <div class="alert alert-danger">{{ errorMessage }}</div>
+            }
+
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name" />
+              @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                <div class="text-danger small">Name is required.</div>
+              }
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <label class="form-label">Governorate</label>
+                <select
+                  class="form-select"
+                  formControlName="governorateId"
+                  (change)="onGovernorateChange()"
+                >
+                  <option [ngValue]="null" disabled>Select Governorate</option>
+                  @for (gov of governorates(); track gov.id) {
+                    <option [ngValue]="gov.id">{{ gov.name }}</option>
+                  }
+                </select>
+              </div>
+
+              <div class="col">
+                <label class="form-label">City / Area</label>
+                <select class="form-select" formControlName="cityId">
+                  <option [ngValue]="null" disabled>Select City</option>
+                  @for (city of cities(); track city.id) {
+                    <option [ngValue]="city.id">{{ city.name }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Pick Location on Map</label>
+              <div #mapContainer style="height: 300px; border-radius: 4px"></div>
+              <small class="text-muted">
+                Lat: {{ form.get('latitude')?.value ?? '—' }}, Lng:
+                {{ form.get('longitude')?.value ?? '—' }}
+              </small>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Customer Image</label>
+              <input
+                type="file"
+                class="form-control"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="submitting">
+              {{ submitting ? 'Saving...' : 'Save Customer' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Customers</h2>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-primary" (click)="openNearestModal()">
+      Find Nearby Customers
+    </button>
+    <button class="btn btn-outline-primary" (click)="openViewAllModal()">View All on Map</button>
+  </div>
+</div>
+
+<div class="btn-group mb-3" role="group">
+  <button
+    class="btn"
+    [class.btn-primary]="viewMode() === 'table'"
+    [class.btn-outline-primary]="viewMode() !== 'table'"
+    (click)="setViewMode('table')"
+  >
+    Table View
+  </button>
+  <button
+    class="btn"
+    [class.btn-primary]="viewMode() === 'card'"
+    [class.btn-outline-primary]="viewMode() !== 'card'"
+    (click)="setViewMode('card')"
+  >
+    Card View
+  </button>
+</div>
+
+@if (viewMode() === 'table') {
+  <app-customer-table
+    [customers]="customers()"
+    (viewDetails)="onViewDetails($event)"
+    (viewLocation)="onViewLocation($event)"
+    (getDirections)="onGetDirections($event)"
+  ></app-customer-table>
+} @else {
+  <app-customer-card-list
+    [customers]="customers()"
+    (viewDetails)="onViewDetails($event)"
+    (viewLocation)="onViewLocation($event)"
+    (getDirections)="onGetDirections($event)"
+  ></app-customer-card-list>
+}
+
+<app-view-location-modal
+  [isOpen]="isLocationModalOpen()"
+  [customer]="selectedLocationCustomer()"
+  (closed)="onLocationModalClosed()"
+></app-view-location-modal>
+
+<app-pagination
+  [currentPage]="currentPage()"
+  [totalCount]="totalCount()"
+  [pageSize]="pageSize"
+  (pageChange)="goToPage($event)"
+></app-pagination>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Customers</h2>
+  <button class="btn btn-primary" (click)="openAddModal()">+ Add Customer</button>
+</div>
+
+<!-- ...table/card/pagination... -->
+
+<app-nearest-customers-modal
+  [isOpen]="isNearestModalOpen()"
+  (closed)="onNearestModalClosed()"
+></app-nearest-customers-modal>
+
+<app-view-all-map-modal
+  [isOpen]="isViewAllModalOpen()"
+  (closed)="onViewAllModalClosed()"
+></app-view-all-map-modal>
+
+<app-add-customer-modal
+  [isOpen]="isAddModalOpen()"
+  (closed)="onModalClosed()"
+  (customerAdded)="onCustomerAdded()"
+></app-add-customer-modal>
+
+<app-customer-detail-modal
+  [customerId]="selectedCustomerId()"
+  [isOpen]="isDetailModalOpen()"
+  (closed)="onDetailModalClosed()"
+  (imagesChanged)="onImagesChanged()"
+></app-customer-detail-modal>

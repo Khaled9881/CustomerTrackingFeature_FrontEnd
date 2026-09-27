@@ -1,0 +1,44 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+  @for (customer of customers; track customer.id) {
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        @if (customer.mainImagePath) {
+          <img
+            [src]="customer.mainImagePath"
+            [alt]="customer.name"
+            class="card-img-top"
+            style="height: 180px; object-fit: cover"
+          />
+        } @else {
+          <div
+            class="bg-secondary d-flex align-items-center justify-content-center text-white"
+            style="height: 180px"
+          >
+            No Image
+          </div>
+        }
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ customer.name }}</h5>
+          <p class="card-text text-muted mb-1">
+            {{ customer.governorateName }} — {{ customer.cityName }}
+          </p>
+
+          <div class="mt-auto d-flex flex-column gap-1">
+            <button class="btn btn-sm btn-outline-primary" (click)="onViewDetails(customer.id)">
+              Details
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="onViewLocation(customer)">
+              📍 Location
+            </button>
+            <button class="btn btn-sm btn-outline-success" (click)="onGetDirections(customer)">
+              🧭 Directions
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @empty {
+    <div class="col-12 text-center text-muted py-4">No customers found.</div>
+  }
+</div>

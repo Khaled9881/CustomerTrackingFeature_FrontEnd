@@ -1,0 +1,63 @@
+@if (isOpen) {
+  <div class="modal d-block" tabindex="-1" style="background: rgba(0, 0, 0, 0.5)">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Nearest Customers</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+
+        <div class="modal-body">
+          @if (loading()) {
+            <p class="text-center text-muted">
+              Detecting your location and finding nearby customers...
+            </p>
+          }
+          @if (errorMessage(); as error) {
+            <div class="alert alert-danger">{{ error }}</div>
+          }
+
+          @if (!loading() && !errorMessage()) {
+            <ul class="list-group">
+              @for (customer of customers(); track customer.id) {
+                <li class="list-group-item d-flex align-items-center gap-3">
+                  @if (customer.mainImagePath) {
+                    <img
+                      [src]="customer.mainImagePath"
+                      class="rounded"
+                      style="width: 50px; height: 50px; object-fit: cover"
+                    />
+                  } @else {
+                    <div
+                      class="bg-secondary rounded d-flex align-items-center justify-content-center text-white"
+                      style="width: 50px; height: 50px; font-size: 0.6rem"
+                    >
+                      No Img
+                    </div>
+                  }
+
+                  <div class="flex-grow-1">
+                    <div class="fw-bold">{{ customer.name }}</div>
+                    <div class="text-muted small">
+                      {{ customer.governorateName }} — {{ customer.cityName }}
+                    </div>
+                  </div>
+
+                  <span class="badge bg-primary rounded-pill">
+                    {{ customer.distanceKm | number: '1.1-1' }} km
+                  </span>
+                </li>
+              } @empty {
+                <li class="list-group-item text-center text-muted">No customers found.</li>
+              }
+            </ul>
+          }
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

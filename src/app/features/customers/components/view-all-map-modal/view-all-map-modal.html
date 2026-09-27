@@ -1,0 +1,26 @@
+@if (isOpen) {
+  <div class="modal d-block" tabindex="-1" style="background: rgba(0, 0, 0, 0.5)">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">All Customers — Map View</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+
+        <div class="modal-body">
+          @if (loading) {
+            <p class="text-center text-muted">Loading customers...</p>
+          }
+          @if (errorMessage) {
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+          }
+          <div #mapContainer style="height: 500px; border-radius: 4px"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
